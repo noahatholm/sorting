@@ -17,6 +17,8 @@ NodeT * node_init(int value){
     NodeT * new_node = (NodeT * )malloc(sizeof(NodeT));
     new_node->data = (DataT *)malloc(sizeof(DataT));
     new_node->data->value = value;
+    new_node->next = NULL;
+    new_node->prev = NULL;
 
     return new_node;
 }

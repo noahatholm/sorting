@@ -3,6 +3,7 @@
 
 typedef struct Data{
     int value;
+    int orginal_order; //Used to check stability 
 } DataT;
 
 typedef struct Node {
