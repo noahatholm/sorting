@@ -5,6 +5,10 @@
 #include "sort_bubble.h"
 #include "linked_list.h"
 
+#define START_N 5000
+
+
+
 ListsT * generate_lists(int size);
 void print_lists(ListsT * test_lists);
 void destroy_lists(ListsT * test_lists);
@@ -12,13 +16,13 @@ void destroy_lists(ListsT * test_lists);
 int main (){
 
     //Generate Lists
-    ListsT * test_lists = generate_lists(5);
+    ListsT * test_lists = generate_lists(START_N);
 
     //print_lists(test_lists);
     
 
     #ifdef BUBBLE
-        analyse_sort(test_lists, bubble_sort);
+        analyse_sort(test_lists,START_N, bubble_sort);
     #elif defined(INSERTION)
         printf("Insert\n");
     #else
@@ -54,8 +58,8 @@ ListsT * generate_lists(int size){
     //Best case lists already in order
     //Worst case reverse order
     //Averge Random Numbers
-    for (int i = 0; i < size * 3; i++){
-        int random_number = rand() % size * 2; 
+    for (int i = 0; i < size * 4; i++){
+        int random_number = rand() % size; 
 
         if (i < size){
             NodeT * node1 = linked_list_append(test_lists->best_case_1,i);
@@ -81,8 +85,8 @@ ListsT * generate_lists(int size){
         NodeT * node3 = linked_list_append(test_lists->best_case_3, i);
         node3->data->orginal_order = i;
 
-        NodeT * node6 = linked_list_append(test_lists->worst_case_3, size*3-i-1);
-        node6->data->orginal_order;
+        NodeT * node6 = linked_list_append(test_lists->worst_case_3, size*4-i-1);
+        node6->data->orginal_order = i;
 
         NodeT * node9 = linked_list_append(test_lists->average_case_3,random_number);
         node9->data->orginal_order = i;

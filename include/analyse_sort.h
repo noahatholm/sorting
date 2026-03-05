@@ -14,14 +14,14 @@ typedef struct Lists{
 } ListsT;
 
 enum TimeComplexity {
-  ONE,
-  LogN,
-  N,
-  NLogN,
-  N,
-  NQuad,
-  NExp,
-  NFact
+  CONSTANT,
+  LOGARITHMIC,
+  LINEAR,
+  LOGLINEAR,
+  QUADRATIC,
+  EXPONENTIAL,
+  FACTORIAL,
+  UNKNOWN
 }; 
 
 typedef struct TimeResults{
@@ -47,12 +47,16 @@ typedef struct TestResults{
 
 typedef void (*SortStrategy)(LinkedListT * list);
 
-void analyse_sort(ListsT * test_lists, SortStrategy strategy); //Apparantly this is c method to do strategy pattern 
+void analyse_sort(ListsT * test_lists, int start_n, SortStrategy strategy); //Apparantly this is c method to do strategy pattern 
 
-int time_sort(LinkedListT * list, SortStrategy sort);
+long long time_sort(LinkedListT * list, SortStrategy sort);
 
 TestResultsT * check_results(ListsT * test_lists, TimeResultsT * time_results);
 
-void print_results(TestResultsT * results);
+void print_results(TestResultsT * results, TimeResultsT * time_results, int start_n);
 
-enum TimeComplexity estimate_complexity(int run1, int run2, int run3);
+enum TimeComplexity estimate_complexity(double n1, double n2, double n3);
+
+int check_correctness(LinkedListT * list);
+
+int check_stability(LinkedListT * list);
