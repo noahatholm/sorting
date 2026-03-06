@@ -5,7 +5,6 @@
 #include "sort_bubble.h"
 #include "linked_list.h"
 
-#define START_N 500
 
 
 
@@ -13,16 +12,20 @@ ListsT * generate_lists(int size);
 void print_lists(ListsT * test_lists);
 void destroy_lists(ListsT * test_lists);
 
-int main (){
+int main (int argc, char** argv){
 
+    if (argc < 2) return -1;
+    int list_len = atoi(argv[1]);
     //Generate Lists
-    ListsT * test_lists = generate_lists(START_N);
+    ListsT * test_lists = generate_lists(list_len);
 
     //print_lists(test_lists);
     
 
     #ifdef BUBBLE
-        analyse_sort(test_lists,START_N, bubble_sort);
+        analyse_sort(test_lists,list_len, bubble_sort);
+    #elif defined (BUBBLE_ADAPTIVE)
+        analyse_sort(test_lists,list_len, bubble_sort_adpative);
     #elif defined(INSERTION)
         printf("Insert\n");
     #else

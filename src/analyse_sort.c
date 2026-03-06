@@ -92,8 +92,8 @@ enum TimeComplexity estimate_complexity(long double n1, long double n2, long dou
 
     //Still tweaking these numbers
     if (order1_2 < 1.2) return CONSTANT;
-    if (order1_2 < 2.1 && order2_1) return LINEAR;
-    if (order1_2 > 3.7 && order1_2 < 5.5 && order2_1 <= 0.99) return QUADRATIC;
+    if (order1_2 < 2.1 && order2_1 < 1.15 && order2_1 > 0.8 ) return LINEAR;
+    if (order1_2 > 3 && order1_2 < 6 && order2_1 > 0.9) return QUADRATIC; //Obvs 2nd order should be > 1 here but OS moment
     if (order1_2 > 2.1 && order1_2 < 3.0 && order2_1 < 0.99) return LOGLINEAR;
     if (order1_2 > 5) return EXPONENTIAL;
     if (order1_1 > 20 && order2_1 > 2) return FACTORIAL;
@@ -152,10 +152,10 @@ int check_correctness(LinkedListT * list){
 }
 
 void print_results(TestResultsT * results, TimeResultsT * time_results, int start_n){
-    printf("--------------------Timer-------------------\nN:        %8d     %8d     %8d\n", start_n, start_n * 2, start_n * 4);
-    printf("Best:   %10d   %10d   %10d\n",time_results->best_time_1, time_results->best_time_2,time_results->best_time_3);
-    printf("Average:%10d   %10d   %10d\n",time_results->average_time_1, time_results->average_time_2,time_results->average_time_3);
-    printf("Worst:  %10d   %10d   %10d\n",time_results->worst_time_1, time_results->worst_time_2,time_results->worst_time_3);
+    printf("--------------------Timer-------------------\nN:        %8d     %8d     %8d\n", start_n, start_n << 1, start_n << 2);
+    printf("Best:   %10lld   %10lld   %10lld\n",time_results->best_time_1, time_results->best_time_2,time_results->best_time_3);
+    printf("Average:%10lld   %10lld   %10lld\n",time_results->average_time_1, time_results->average_time_2,time_results->average_time_3);
+    printf("Worst:  %10lld   %10lld   %10lld\n",time_results->worst_time_1, time_results->worst_time_2,time_results->worst_time_3);
 
 
     printf("----------------Time Complexity-------------\nBest Case: %s\nAverage Case: %s\nWorst Case: %s\n", timeComplexity_To_String(results->best_case), timeComplexity_To_String(results->average_case), timeComplexity_To_String(results->worst_case));

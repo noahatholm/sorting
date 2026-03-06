@@ -4,3 +4,4 @@
 
 void bubble_sort(LinkedListT * list);
 
+void bubble_sort_adpative(LinkedListT * list);
