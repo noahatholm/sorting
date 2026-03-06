@@ -20,12 +20,10 @@ void analyse_sort(ListsT * test_lists, int start_n, SortStrategy strategy){
     //Time the average cases
     time_results->average_time_1 = time_sort(test_lists->average_case_1,strategy);
     time_results->average_time_2 = time_sort(test_lists->average_case_2,strategy);
-
     time_results->average_time_3 = time_sort(test_lists->average_case_3,strategy);
 
     //Time the worst cases
     time_results->worst_time_1 = time_sort(test_lists->worst_case_1,strategy);
-
     time_results->worst_time_2 = time_sort(test_lists->worst_case_2,strategy);
     time_results->worst_time_3 = time_sort(test_lists->worst_case_3,strategy);
 
@@ -84,18 +82,18 @@ char * bool_to_string(int b){
     return "False";
 }
 
-enum TimeComplexity estimate_complexity(double n1, double n2, double n3){ //assumes start doubles between runs
+enum TimeComplexity estimate_complexity(long double n1, long double n2, long double n3){ //assumes start doubles between runs
     //Calculate differentials
     double order1_1 = n2/n1;
     double order1_2 = n3/n2;
 
     double order2_1 = order1_2 / order1_1;
-    printf("First Order: %lf Second Order %lf\n", order1_2, order2_1);
+    printf("First Order 1: %lf First Order 2 %lf Second Order %lf\n",order1_1  ,order1_2, order2_1);
 
     //Still tweaking these numbers
     if (order1_2 < 1.2) return CONSTANT;
     if (order1_2 < 2.1 && order2_1) return LINEAR;
-    if (order1_2 > 3.7 && order1_2 < 4.3 && order2_1 >= 0.99) return QUADRATIC;
+    if (order1_2 > 3.7 && order1_2 < 5.5 && order2_1 <= 0.99) return QUADRATIC;
     if (order1_2 > 2.1 && order1_2 < 3.0 && order2_1 < 0.99) return LOGLINEAR;
     if (order1_2 > 5) return EXPONENTIAL;
     if (order1_1 > 20 && order2_1 > 2) return FACTORIAL;
@@ -154,14 +152,14 @@ int check_correctness(LinkedListT * list){
 }
 
 void print_results(TestResultsT * results, TimeResultsT * time_results, int start_n){
-    printf("---------------Timer---------------\nN:        %5d     %5d     %5d\n", start_n, start_n * 2, start_n * 4);
-    printf("Best:   %7d   %7d   %7d\n",time_results->best_time_1, time_results->best_time_1,time_results->best_time_3);
-    printf("Average:%7d   %7d   %7d\n",time_results->average_time_1, time_results->average_time_2,time_results->average_time_3);
-    printf("Worst:  %7d   %7d   %7d\n",time_results->worst_time_1, time_results->worst_time_2,time_results->worst_time_3);
+    printf("--------------------Timer-------------------\nN:        %8d     %8d     %8d\n", start_n, start_n * 2, start_n * 4);
+    printf("Best:   %10d   %10d   %10d\n",time_results->best_time_1, time_results->best_time_2,time_results->best_time_3);
+    printf("Average:%10d   %10d   %10d\n",time_results->average_time_1, time_results->average_time_2,time_results->average_time_3);
+    printf("Worst:  %10d   %10d   %10d\n",time_results->worst_time_1, time_results->worst_time_2,time_results->worst_time_3);
 
 
-    printf("-----------Time Complexity---------\nBest Case: %s\nAverage Case: %s\nWorst Case: %s\n", timeComplexity_To_String(results->best_case), timeComplexity_To_String(results->average_case), timeComplexity_To_String(results->worst_case));
+    printf("----------------Time Complexity-------------\nBest Case: %s\nAverage Case: %s\nWorst Case: %s\n", timeComplexity_To_String(results->best_case), timeComplexity_To_String(results->average_case), timeComplexity_To_String(results->worst_case));
 
-    printf("--------------Properties-----------\nCorrectness: %s\nStability: %s\nAdaptability: %s\n",bool_to_string(results->correctness), bool_to_string(results->stability), bool_to_string(results->adaptability));
+    printf("-------------------Properties---------------\nCorrectness: %s\nStability: %s\nAdaptability: %s\n",bool_to_string(results->correctness), bool_to_string(results->stability), bool_to_string(results->adaptability));
     
 }

@@ -25,15 +25,15 @@ enum TimeComplexity {
 }; 
 
 typedef struct TimeResults{
-    int best_time_1;
-    int best_time_2;
-    int best_time_3;
-    int average_time_1;
-    int average_time_2;
-    int average_time_3;
-    int worst_time_1;
-    int worst_time_2;
-    int worst_time_3;
+    long long best_time_1;
+    long long best_time_2;
+    long long best_time_3;
+    long long average_time_1;
+    long long average_time_2;
+    long long average_time_3;
+    long long worst_time_1;
+    long long worst_time_2;
+    long worst_time_3;
 } TimeResultsT;
 
 typedef struct TestResults{
@@ -55,7 +55,7 @@ TestResultsT * check_results(ListsT * test_lists, TimeResultsT * time_results);
 
 void print_results(TestResultsT * results, TimeResultsT * time_results, int start_n);
 
-enum TimeComplexity estimate_complexity(double n1, double n2, double n3);
+enum TimeComplexity estimate_complexity(long double n1, long double n2, long double n3);
 
 int check_correctness(LinkedListT * list);
 

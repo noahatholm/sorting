@@ -5,7 +5,7 @@
 #include "sort_bubble.h"
 #include "linked_list.h"
 
-#define START_N 5000
+#define START_N 500
 
 
 
