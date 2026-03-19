@@ -4,6 +4,7 @@
 #include "analyse_sort.h"
 #include "sort_bubble.h"
 #include "linked_list.h"
+#include "sort_selection.h"
 
 
 
@@ -28,6 +29,8 @@ int main (int argc, char** argv){
         analyse_sort(test_lists,list_len, bubble_sort_adpative);
     #elif defined(INSERTION)
         printf("Insert\n");
+    #elif defined(SELECTION)
+        analyse_sort(test_lists,list_len, selection_sort);
     #else
         printf("Everything\n");
     #endif

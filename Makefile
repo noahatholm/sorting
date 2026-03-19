@@ -30,6 +30,10 @@ insertion: $(OUT_DIR)
 	$(CC) $(CFLAGS) -DINSERTION $(DEFAULT_FILES) $(SRC_DIR)/sort_insertion.c  -o $(OUT_DIR)/sort_insertion
 	$(RUN_FLAGS) ./$(OUT_DIR)/sort_insertion $(DEFAULT_N)
 
+selection: $(OUT_DIR)
+	$(CC) $(CFLAGS) -DSELECTION $(DEFAULT_FILES) $(SRC_DIR)/sort_selection.c -o $(OUT_DIR)/sort_selection
+	$(RUN_FLAGS) ./$(OUT_DIR)/sort_selection $(DEFAULT_N)
+
 sorting: $(OUT_DIR)
 	$(CC) $(CFLAGS) $(DEFAULT_FILES) $(SRC_DIR)/sort_* -o $(OUT_DIR)/sort_compare
 	$(RUN_FLAGS) ./$(OUT_DIR)/sort_compare $(DEFAULT_N)
