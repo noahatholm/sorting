@@ -101,12 +101,17 @@ void linked_list_destroy(LinkedListT * list){
 }
 
 void print_linked_list(LinkedListT * list){
+    if (!list){
+        return;
+    }
+
     printf("[");
     NodeT * current_node = list->head;
-    while (current_node){
+    while (current_node->next){
         printf("%d,", current_node->data->value);
         current_node=current_node->next;
     }
+    printf("%d",current_node->data->value);
     printf("]\n");
 
 }
@@ -122,6 +127,77 @@ int free_node(NodeT * node){
     return -1;
 }
 
+LinkedListT * linked_list_split(LinkedListT * list){
+    if (!list || list->length == 1){
+        return NULL;
+    }
+
+    //Find the midpoint
+    NodeT * fast = list->head;
+    NodeT * slow = list->head;
+
+    while (fast->next && fast->next->next){
+        fast = fast->next->next;
+        slow = slow->next;
+    }
+
+    //Found midpoint Now must split list
+    LinkedListT * new_list = (LinkedListT  *)malloc(sizeof(LinkedListT));
+    new_list->head = slow->next;
+    //Update lengths
+    new_list->length = list->length/2;
+    list->length = list->length - list->length/2;
+
+    //Update tails
+    list->tail = slow;
+    if (fast->next){fast=fast->next;}
+    new_list->tail = fast;
+
+    //Undo the links
+    new_list->head->prev = NULL; 
+    slow->next = NULL; 
+
+    return new_list;
+}
+
+void linked_list_insert_after(LinkedListT * list,NodeT * node1, NodeT * node2){
+    NodeT * temp = node1->next;
+
+    node1->next = node2;
+    node2->prev = node1;
+    node2->next = temp;
+
+    if (temp){
+        temp->prev = node2;
+    }
+    list->length++;
+
+    if (node1 == list->tail) {
+        list->tail = node2;
+    }
+}
+
+
+
+void linked_list_append_node(LinkedListT * list, NodeT * node){
+    //Sanitise Node
+    node->next = NULL;
+    node->prev = NULL;
+
+    if (!list->head){
+        list->head = node;
+    }
+
+    if (list->tail){
+        list->tail->next = node;
+        node->prev = list->tail;
+
+    }
+    list->tail = node;
+
+    list->length++;
+
+}
 
 
 

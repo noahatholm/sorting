@@ -6,7 +6,7 @@ TEST_DIR = tests
 TARGET = $(OUT_DIR)/sort
 DEFAULT_FILES = $(SRC_DIR)/main.c $(SRC_DIR)/analyse_sort.c $(SRC_DIR)/linked_list.c
 RUN_FLAGS = taskset -c 1 #Restricts to only one core should lead to more consistant results by reducing cache misses hopefully
-DEFAULT_N = 10000
+DEFAULT_N = 4
 
 $(OUT_DIR):
 	mkdir -p $(OUT_DIR)
@@ -33,6 +33,10 @@ insertion: $(OUT_DIR)
 selection: $(OUT_DIR)
 	$(CC) $(CFLAGS) -DSELECTION $(DEFAULT_FILES) $(SRC_DIR)/sort_selection.c -o $(OUT_DIR)/sort_selection
 	$(RUN_FLAGS) ./$(OUT_DIR)/sort_selection $(DEFAULT_N)
+
+merge: $(OUT_DIR)
+	$(CC) $(CFLAGS) -DMERGE $(DEFAULT_FILES) $(SRC_DIR)/sort_merge.c -o $(OUT_DIR)/sort_merge
+	$(RUN_FLAGS) ./$(OUT_DIR)/sort_merge $(DEFAULT_N)
 
 sorting: $(OUT_DIR)
 	$(CC) $(CFLAGS) $(DEFAULT_FILES) $(SRC_DIR)/sort_* -o $(OUT_DIR)/sort_compare

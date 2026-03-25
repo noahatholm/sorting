@@ -43,5 +43,9 @@ int free_node(NodeT * node);
 
 void print_linked_list(LinkedListT * list);
 
+LinkedListT * linked_list_split(LinkedListT * list);
 
+void linked_list_insert_after(LinkedListT * list,NodeT * node1, NodeT * node2);
+
+void linked_list_append_node(LinkedListT * list, NodeT * node);
 

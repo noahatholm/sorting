@@ -2,9 +2,10 @@
 #include <stdlib.h>
 
 #include "analyse_sort.h"
-#include "sort_bubble.h"
 #include "linked_list.h"
+#include "sort_bubble.h"
 #include "sort_selection.h"
+#include "sort_merge.h"
 
 
 
@@ -31,6 +32,8 @@ int main (int argc, char** argv){
         printf("Insert\n");
     #elif defined(SELECTION)
         analyse_sort(test_lists,list_len, selection_sort);
+    #elif defined(MERGE)
+        analyse_sort(test_lists,list_len,merge_sort);
     #else
         printf("Everything\n");
     #endif

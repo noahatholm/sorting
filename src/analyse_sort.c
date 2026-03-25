@@ -26,9 +26,10 @@ void analyse_sort(ListsT * test_lists, int start_n, SortStrategy strategy){
     // print_linked_list(test_lists->worst_case_3);
     time_results->worst_time_1 = time_sort(test_lists->worst_case_1,strategy);
     time_results->worst_time_2 = time_sort(test_lists->worst_case_2,strategy);
+    printf("\n\n");
     time_results->worst_time_3 = time_sort(test_lists->worst_case_3,strategy);
 
-    // print_linked_list(test_lists->worst_case_3);
+    print_linked_list(test_lists->worst_case_3);
 
     
     TestResultsT * results = check_results(test_lists, time_results);
